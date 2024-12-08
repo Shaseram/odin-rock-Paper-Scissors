@@ -1,7 +1,93 @@
-const arrayElecciones = ["piedra", "papel", "tijera"];
 
-const eleccionJuego = Math.floor(Math.random() * arrayElecciones.length);
+function getComputerChoice() {
+    let arrayElecciones = ["piedra", "papel", "tijera"];
 
-const opcionJuego = arrayElecciones[eleccionJuego];
+    let eleccionJuego = Math.floor(Math.random() * arrayElecciones.length);
 
-console.log(opcionJuego);
+    let opcionJuego = arrayElecciones[eleccionJuego];
+    
+    return opcionJuego;
+}
+
+
+function getHumanChoice() {
+    let eleccionHumano = prompt("Ingresa la opcion para jugar (piedra - papel - tijera)");
+
+    return eleccionHumano.toLowerCase();
+}
+
+function playRound(humanChoice, computerChoice) {
+
+    if(humanChoice === computerChoice){
+        console.log("EMPATE");
+    } else {
+        switch(humanChoice) {
+            case "tijera":
+                if(computerChoice === "papel") {
+                    console.log("GANASTE");
+                    return 1;
+                } else {
+                    console.log("PERDISTE");
+                    return 0;
+                }
+                
+            case "papel":
+                if(computerChoice === "piedra") {
+                    console.log("GANASTE");
+                    return 1;
+                } else {
+                    console.log("PERDISTE");
+                    return 0;
+                }
+            case "piedra":
+                if(computerChoice === "tijera") {
+                    console.log("GANASTE");
+                    return 1;
+                } else {
+                    console.log("PERDISTE");
+                    return 0;
+                }
+            default:
+                break;
+        }
+    }
+}
+
+
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    for(let i = 1 ; i <= 5 ; i++) {
+        console.log("Ronda ",i);
+        let computador = getComputerChoice();
+        let humano = getHumanChoice();
+
+        console.log("Eleccion Jugador =",humano);
+        console.log("Eleccion Computador =",computador);
+        
+        
+        let resultado = playRound(humano,computador);
+
+        if (resultado === 1) {
+            humanScore += 1;
+        } else if (resultado === 0){
+            computerScore += 1;
+        }
+        
+        console.log("");
+        console.log("Human Score =",humanScore);
+        console.log("Computer Score =",computerScore);
+        console.log("");
+    }
+
+    if(humanScore > computerScore) {
+        console.log("JUGADOR GANA");
+    } else if(humanScore === computerScore) {
+        console.log("HAY EMPATE");
+    } else {console.log("HAZ PERDIDO")}
+}
+
+
+
+playGame();
