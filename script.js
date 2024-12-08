@@ -1,3 +1,5 @@
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     let arrayElecciones = ["piedra", "papel", "tijera"];
@@ -20,6 +22,7 @@ function playRound(humanChoice, computerChoice) {
 
     if(humanChoice === computerChoice){
         console.log("EMPATE");
+        return -1;
     } else {
         switch(humanChoice) {
             case "tijera":
@@ -55,8 +58,6 @@ function playRound(humanChoice, computerChoice) {
 
 
 function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
 
     for(let i = 1 ; i <= 5 ; i++) {
         console.log("Ronda ",i);
