@@ -4,7 +4,7 @@ let computerScore = 0;
 function getComputerChoice() {
     let arrayElecciones = ["piedra", "papel", "tijera"];
 
-    let eleccionJuego = Math.floor(Math.random() * arrayElecciones.length);
+    let leccionJuego = Math.floor(Math.random() * arrayElecciones.length);
 
     let opcionJuego = arrayElecciones[eleccionJuego];
     
@@ -14,7 +14,8 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     let eleccionHumano = prompt("Ingresa la opcion para jugar (piedra - papel - tijera)");
-
+    let pepe = 0
+    console.log(pepe)
     return eleccionHumano.toLowerCase();
 }
 
