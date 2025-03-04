@@ -4,7 +4,7 @@ let computerScore = 0;
 function getComputerChoice() {
     let arrayElecciones = ["piedra", "papel", "tijera"];
 
-    let leccionJuego = Math.floor(Math.random() * arrayElecciones.length);
+    let eleccionJuego = Math.floor(Math.random() * arrayElecciones.length);
 
     let opcionJuego = arrayElecciones[eleccionJuego];
     
