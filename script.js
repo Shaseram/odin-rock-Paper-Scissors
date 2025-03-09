@@ -1,54 +1,53 @@
 let humanScore = 0;
 let computerScore = 0;
+let contadorJuegos = 0;
+let eleccionHumano = NaN;
+let resultado = NaN;
+let computador = NaN;
+
+
+const nombreJugador = 'Jugador: ';
+const nombreComputador = 'CPU: ';
+const roundWinner = document.querySelector("#round-winner");
+const opciones = document.getElementById("options");
+const container = document.getElementById("container");
+
+
+
 
 function getComputerChoice() {
-    let arrayElecciones = ["piedra", "papel", "tijera"];
+    const arrayElecciones = ["piedra", "papel", "tijera"];
 
     let eleccionJuego = Math.floor(Math.random() * arrayElecciones.length);
-
-    let opcionJuego = arrayElecciones[eleccionJuego];
     
-    return opcionJuego;
+    return arrayElecciones[eleccionJuego];;
 }
 
-
-function getHumanChoice() {
-    let eleccionHumano = prompt("Ingresa la opcion para jugar (piedra - papel - tijera)");
-    let pepe = 0
-    console.log(pepe)
-    return eleccionHumano.toLowerCase();
-}
 
 function playRound(humanChoice, computerChoice) {
 
     if(humanChoice === computerChoice){
-        console.log("EMPATE");
+        
         return -1;
     } else {
         switch(humanChoice) {
             case "tijera":
                 if(computerChoice === "papel") {
-                    console.log("GANASTE");
                     return 1;
                 } else {
-                    console.log("PERDISTE");
                     return 0;
                 }
                 
             case "papel":
                 if(computerChoice === "piedra") {
-                    console.log("GANASTE");
                     return 1;
                 } else {
-                    console.log("PERDISTE");
                     return 0;
                 }
             case "piedra":
                 if(computerChoice === "tijera") {
-                    console.log("GANASTE");
                     return 1;
                 } else {
-                    console.log("PERDISTE");
                     return 0;
                 }
             default:
@@ -57,37 +56,113 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+function gameResults(resultado, computador) {
+    contadorJuegos +=1;
+
+    let elecJ = document.querySelector("#eJ");
+    elecJ.textContent = nombreJugador + eleccionHumano;
+    let elecC = document.querySelector("#eC");
+    elecC.textContent = nombreComputador + computador;
+
+    
+
+    if (resultado === 1) {
+        humanScore += 1;
+        roundWinner.textContent = 'Jugador gana la ronda +1 punto';
+    } else if (resultado === 0){
+        computerScore += 1;
+        roundWinner.textContent = 'CPU gana la ronda +1 punto';
+    } else {
+        roundWinner.textContent = 'EMPATE, ninguno suma puntos';
+
+    }
+
+    document.getElementById("player-score").textContent = "Puntos Jugador: " + humanScore;
+    document.getElementById("cpu-score").textContent = "Puntos CPU: " + computerScore;
+    document.querySelector("#round").textContent = "Ronda: " + contadorJuegos;
+    
+    if(contadorJuegos === 5) {
+        let mensajeGanador = document.createElement("span");
+        mensajeGanador.id = 'winner-msg';
+        
+
+        if(humanScore > computerScore) {
+            mensajeGanador.textContent = 'JUGADOR HA GANADO EN 5 JUEGOS';
+
+        } else if(humanScore === computerScore) {
+            mensajeGanador.textContent = 'HAY EMPATE EN 5 JUEGOS';
+        } else {mensajeGanador.textContent = 'LA CPU HA GANADO EN 5 JUEGOS, HAZ PERDIDO'}
+        container.appendChild(mensajeGanador);
+
+        // let botonResetear = document.createElement("button");
+        // botonResetear.textContent = 'Nuevo juego';
+        // botonResetear.id = 'boton-reset';
+
+    }
+    
+}
+
 
 function playGame() {
 
-    for(let i = 1 ; i <= 5 ; i++) {
-        console.log("Ronda ",i);
-        let computador = getComputerChoice();
-        let humano = getHumanChoice();
+    let botonPiedra = document.createElement("button");
+    botonPiedra.textContent = 'Piedra 🪨';
+    botonPiedra.id = 'boton'
+    let botonPapel = document.createElement("button");
+    botonPapel.textContent = 'Papel 🧻';
+    botonPapel.id = 'boton'
+    let botonTijera = document.createElement("button");
+    botonTijera.textContent = 'Tijera ✂️';
+    botonTijera.id = 'boton'
 
-        console.log("Eleccion Jugador =",humano);
-        console.log("Eleccion Computador =",computador);
+    botonPiedra.addEventListener("click", () => {
+        computador = getComputerChoice();
+        resultado = playRound('piedra', computador)
+        eleccionHumano = 'piedra';
+        gameResults(resultado, computador);
         
-        
-        let resultado = playRound(humano,computador);
+    });
 
-        if (resultado === 1) {
-            humanScore += 1;
-        } else if (resultado === 0){
-            computerScore += 1;
-        }
+    botonPapel.addEventListener("click", () => {
+        computador = getComputerChoice();
+        resultado = playRound('papel', computador)
+        eleccionHumano = 'papel';
+        gameResults(resultado, computador);
         
-        console.log("");
-        console.log("Human Score =",humanScore);
-        console.log("Computer Score =",computerScore);
-        console.log("");
-    }
+    });
 
-    if(humanScore > computerScore) {
-        console.log("JUGADOR GANA");
-    } else if(humanScore === computerScore) {
-        console.log("HAY EMPATE");
-    } else {console.log("HAZ PERDIDO")}
+    botonTijera.addEventListener("click", () => {
+        computador = getComputerChoice();
+        resultado = playRound('tijera', computador)
+        eleccionHumano = 'tijera';
+        gameResults(resultado, computador);
+        
+    });
+
+    
+
+    let divResultados = document.createElement("div");
+    divResultados.id = 'results';
+
+    let scoreJugador = document.createElement("span");
+    scoreJugador.textContent = "Puntos Jugador: 0";
+    scoreJugador.id = 'player-score'
+    let scoreComputador = document.createElement("span");
+    scoreComputador.textContent = "Puntos CPU: 0";
+    scoreComputador.id = 'cpu-score'
+
+
+
+    divResultados.appendChild(scoreJugador);
+    divResultados.appendChild(scoreComputador);
+
+    container.appendChild(divResultados);
+
+    opciones.appendChild(botonPiedra);
+    opciones.appendChild(botonPapel);
+    opciones.appendChild(botonTijera);
+
+    
 }
 
 

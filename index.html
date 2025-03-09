@@ -1,1 +1,91 @@
-<script src="script.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-paper-scissors</title>
+    <style>
+        body {
+            background-color: #1B1B1F;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+         #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+
+        }
+        #options {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            
+        }
+        #details {
+            width: 450px;
+            height: 150px;
+            color: aliceblue;
+            font-size: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 120px;
+        
+        }
+        #eJ, #eC {
+            max-width: 65ch;
+        }
+        #boton {
+            font-size: 20px;
+            
+            color: black;
+        }
+        #results {
+            display: flex;
+            gap: 30px;
+            font-size: 30px;
+            color: aliceblue;
+        }
+        #round-winner {
+            font-size: 22px;
+            color: aliceblue;
+        }
+        #round {
+            font-size: 25px;
+            color: aliceblue;
+        }
+        #winner-msg {
+            color: red;
+            font-size: 45px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <span id="round"></span>
+        <div id="details">
+            <span id="eJ">Jugador: </span>
+            <span id="eC">CPU: </span>
+
+
+        </div>
+        <div id="results">
+            <span id="round-winner"></span>
+
+        </div>
+
+
+        <div id="options">
+
+
+        </div>
+
+
+    </div>
+    
+
+
+    <script src="script.js"></script>
+</body>
+</html>
